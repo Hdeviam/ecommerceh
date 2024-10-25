@@ -1,17 +1,15 @@
-version: '3.8'
-
 services:
   nestapp:
-    build: hdeviam/ecommercehar:latest
+    build: ./
     ports:
-      - '3001:3000'
+      - '3000:3000'
     env_file:
       - .development.env
     depends_on:
       - postgresdb
 
   postgresdb:
-    image: 'postgres:14'
+    image: 'postgres'
     volumes:
       - pgdata:/var/lib/postgresql/data
     env_file:
