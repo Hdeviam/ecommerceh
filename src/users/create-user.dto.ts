@@ -2,7 +2,7 @@ import { IsString, IsEmail, IsNotEmpty, MinLength, MaxLength, Matches, IsEmpty }
 import { IsEqual } from './custom-decorators'; // Asegúrate de crear este decorador
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 
-export class CreateUserDto {
+export class CreateUserDto {   
 
   @ApiProperty({
     description: 'Este es tu correo',
