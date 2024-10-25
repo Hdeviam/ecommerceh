@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { User } from './users/user.entity'; // Ajusta la ruta según la ubicación real
+import { User } from './users/user.entity'; // Asegúrate de ajustar esta ruta según la ubicación real
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -7,8 +7,17 @@ export const AppDataSource = new DataSource({
   port: +process.env.DB_PORT || 5432,
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || '1234',
-  database: process.env.DB_NAME || 'postgres',
-  entities: [User], // Asegúrate de incluir tus entidades aquí
+  database: process.env.DB_NAME || 'ecommerce',
+  entities: [User], // Asegúrate de incluir todas tus entidades aquí
   migrations: [],
-  synchronize: false, // Deberías usar migraciones en lugar de sincronización automática
+  synchronize: false, // Usa migraciones en lugar de sincronización automática
 });
+
+// Manejo de conexión
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Base de datos conectada con éxito!');
+  })
+  .catch((error) => {
+    console.error('Error al conectar a la base de datos:', error);
+  });

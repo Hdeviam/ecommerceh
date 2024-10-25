@@ -5,6 +5,12 @@ services:
       - '3000:3000'
     env_file:
       - .development.env
+    environment:
+      DB_HOST: postgresdb
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: 1234
+      DB_NAME: ecommerce
     depends_on:
       postgresdb:
         condition: service_healthy
