@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 
-@Injectable()
+@Injectable() 
 export class UsersService {
   constructor(
     @InjectRepository(User)

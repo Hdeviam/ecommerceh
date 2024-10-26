@@ -1,26 +1,26 @@
 services:
   nestapp:
-    build: hdeviam/ecommercehar:latest
+    build: hdeviam/ecommercehar:latest  # Cambia esto si tienes un Dockerfile local
     ports:
       - '3000:3000'
     env_file:
-      - .development.env
+      - .development.env  # Asegúrate de que este archivo existe
     environment:
-      DB_HOST: postgresdb
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: 1234
-      DB_NAME: ecommerce
-    depends_on:
-      postgresdb:
-        condition: service_healthy
+      DB_HOST: dpg-csdtmqggph6c73clm820-a  # Hostname de tu base de datos en Render
+      DB_PORT: 5432  # Puerto de PostgreSQL
+      DB_USER: postgres  # Usuario de tu base de datos en Render
+      DB_PASSWORD: 1234  # Contraseña de tu base de datos
+      DB_NAME: ecommerce  # Nombre de tu base de datos
+    restart: unless-stopped  # Reinicia el contenedor automáticamente si falla
 
   postgresdb:
     image: 'postgres'
     volumes:
       - pgdata:/var/lib/postgresql/data
-    env_file:
-      - .development.env
+    environment:
+      POSTGRES_USER: postgres  # Usuario por defecto
+      POSTGRES_PASSWORD: 1234   # Cambia según sea necesario
+      POSTGRES_DB: ecommerce     # Nombre de la base de datos por defecto
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -28,4 +28,4 @@ services:
       retries: 5
 
 volumes:
-  pgdata:
+  pgdata:  # Para almacenar datos de PostgreSQL si decides usar un servicio local

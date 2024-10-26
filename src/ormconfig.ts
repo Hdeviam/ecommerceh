@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || 'ecommerce',
   entities: [`dist/**/*.entity{.ts,.js}`],
   migrations: ['dist/migrations/*{.ts,.js}'],
-  synchronize: true,
+  synchronize: false,
   dropSchema: false,
   logging: true,
 });
